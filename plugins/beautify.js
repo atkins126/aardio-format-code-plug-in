@@ -100,7 +100,8 @@
         var input_length;
         var handlers, MODE, opt;
         var preindent_string = '';
-
+        
+        var pattern_zh = /[\u4e00-\u9fa5]/;
         whitespace = "\n\r\t ".split('');
         wordchar = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_$'.split('');
         digits = '0123456789'.split('');
@@ -605,9 +606,9 @@
                 parser_pos += 1;
             }
 
-            if (in_array(c, wordchar)) {
+            if (in_array(c, wordchar) || c.match(pattern_zh)) {
                 if (parser_pos < input_length) {
-                    while (in_array(input.charAt(parser_pos), wordchar)) {
+                    while (in_array(input.charAt(parser_pos), wordchar) || input.charAt(parser_pos).match(pattern_zh)) {
                         c += input.charAt(parser_pos);
                         parser_pos += 1;
                         if (parser_pos === input_length) {

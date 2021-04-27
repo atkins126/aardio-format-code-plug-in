@@ -55,13 +55,19 @@ mainForm.btn_format.oncommand = function(id, event) {
     if (#text) {
         var formatCode = vm.script.js_beautify(text, opt);
         formatCode = string.replace(formatCode,'"\s*[\\r\\n]\\s*"','""');
-        ed.selText = formatCode;
+        formatCode = string.replace(formatCode,"<@@] .@>","].");
+        formatCode = string.replace(formatCode,"<@@) .@>",").");
+        
+        ed.selText = formatCode ++ '\r\n';
     } else {
         text = ed.text;
         var formatCode = vm.script.js_beautify(text, opt);
         formatCode = string.replace(formatCode,'"\s*[\\r\\n]\\s*"','""');
+        formatCode = string.replace(formatCode,"<@@] .@>","].");
+        formatCode = string.replace(formatCode,"<@@) .@>",").");
+        
         ed.selectAll();
-        ed.selText = formatCode;
+        ed.selText = formatCode ++ '\r\n';
     }
 }
 
